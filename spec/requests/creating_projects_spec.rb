@@ -21,4 +21,5 @@ describe "Projects" do
       page.should have_content("Name can't be blank") 
     end
   end
+  
 end
