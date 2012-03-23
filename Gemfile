@@ -30,7 +30,7 @@ group :test do
   gem 'capybara-webkit'
   gem 'database_cleaner'
 end
-
+gem "dynamic_form"
 gem 'pg'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
