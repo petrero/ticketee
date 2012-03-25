@@ -2,9 +2,11 @@ require 'spec_helper'
 
 describe "EditingProjects" do
   let(:project) {Factory(:project)}
+  let(:admin) {Factory(:admin_user)}
   before do
     @projects = Array.new()
     @projects.push(project)
+    login_as(admin)
   end
   
   it "update a project with valid attributes" do

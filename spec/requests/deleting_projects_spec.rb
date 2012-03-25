@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe "DeletingProjects" do
+  let(:admin){Factory(:admin_user)}
   let(:project) {Factory(:project)}
   before do
     @projects = Array.new()
     @projects.push(project)
+    login_as(admin)
   end
   
   it "deleting project" do
