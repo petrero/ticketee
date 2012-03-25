@@ -31,6 +31,7 @@ group :test do
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'factory_girl'
+  gem 'launchy'
 end
 gem "dynamic_form"
 gem 'pg'
