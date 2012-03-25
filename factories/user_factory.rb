@@ -4,7 +4,6 @@ Factory.define :user do |u|
   u.password_confirmation {|u| u.password}
 end
 
-Factory.define :confirmed_user, :class => :user do |user|
-  Factory(:user)
-  user.confirm!
+Factory.define :confirmed_user, :parent => :user do |user|
+  user.after_create {|u| u.confirm!} 
 end
