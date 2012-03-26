@@ -25,4 +25,13 @@ describe "CreatingUsers" do
     page.should have_content("User has not been created.")
     page.should have_content("Email can't be blank")
   end
+  
+  it "creates an admin user" do
+    fill_in("Email", :with => "newadmin@ticketee.com")
+    fill_in("Password", :with => "password")
+    page.check("Is an admin?")
+    click_button("Create User")
+    page.should have_content("User has been created")
+    page.should have_content("newadmin@ticketee.com (Admin)")
+  end
 end
