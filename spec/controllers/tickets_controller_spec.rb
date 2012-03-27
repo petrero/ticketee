@@ -25,6 +25,11 @@ describe TicketsController do
       flash[:alert].should == "You cannot create tickets on this project."
     end
     
+    def cannot_update_tickets!
+      response.should redirect_to(project)
+      flash[:alert].should == "You cannot edit tickets on this project."
+    end
+    
     it "cannot begin to create a ticket" do
       get :new, :project_id => project.id
       cannot_create_tickets!
@@ -33,6 +38,16 @@ describe TicketsController do
     it "cannot create a ticket without permission" do
       post :create, :project_id => project.id, :ticket => {}
       cannot_create_tickets!
+    end
+    
+    it "cannot edit a ticket wqithout permission" do
+      get :edit, :id => ticket.id, :project_id => project.id
+      cannot_update_tickets!
+    end
+    
+    it "cannot update a ticket without permission" do
+      put :update, :id => ticket.id, :project_id => project.id, :ticket => {}
+      cannot_update_tickets!
     end
   end
 end
