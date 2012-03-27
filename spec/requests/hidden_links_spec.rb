@@ -8,6 +8,7 @@ describe "Links should be hidden from users who can't act on them" do
   before do
     @projects = Array.new()
     @projects.push(project)
+    Factory(:permission, :thing => project, :user => user, :action => "view")
   end
   
   it "new project links is hidden from non-signed-in users" do
@@ -27,11 +28,6 @@ describe "Links should be hidden from users who can't act on them" do
     page.should have_css('a', :text => "New Project") 
   end
   
-  it "edit project links is hidden from non-signed-in users" do
-    visit('/')
-    click_link(project.name)
-    page.should have_no_css('a', :text => "Edit Project")
-  end
   
   it "edit project links is hidden fron signed-in users" do
     login_as(user)
@@ -47,13 +43,8 @@ describe "Links should be hidden from users who can't act on them" do
     page.should have_css('a', :text => "Edit Project") 
   end
   
-  it "delete project links is hidden from non-signed-in users" do
-    visit('/')
-    click_link(project.name)
-    page.should have_no_css('a', :text => "Delete Project")
-  end
   
-  it "delete project links is hidden fron signed-in users" do
+  it "delete project links is hidden from signed-in users" do
     login_as(user)
     visit('/')
     click_link(project.name)

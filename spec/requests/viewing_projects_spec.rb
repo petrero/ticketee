@@ -6,11 +6,13 @@ describe "viewing projects" do
   before do    
     @projects = Array.new()
     @projects.push(project)
-    Factory(:permission, :thing => project, :action => "view", :user => user)
-    login_as(user)
+    Factory(:permission, :thing => project, :action => "view", :user => user)   
   end
     
   it "viewing projects" do
+    visit('/')
+    page.should have_no_content(project.name)
+    login_as(user)
     visit('/')
     click_link(project.name)
     current_path.should == project_path(project)    
