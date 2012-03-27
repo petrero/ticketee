@@ -11,6 +11,7 @@ describe "EditingTickets" do
     @tickets = Array.new()
     @tickets.push(ticket)
     Factory(:permission, :thing => project, :user => user, :action => "view")
+    Factory(:permission, :thing => project, :user => user, :action => "edit tickets")
     login_as(user)
     visit('/')  
     click_link(project.name)

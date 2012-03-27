@@ -11,6 +11,7 @@ describe "DeletingTickets" do
     @tickets = Array.new()
     @tickets.push(ticket)
     Factory(:permission, :thing => project, :user => user, :action => "view")
+    Factory(:permission, :thing => project, :user => user, :action => "delete tickets")
     login_as(user)
     visit('/')
     click_link(project.name)
