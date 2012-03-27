@@ -5,12 +5,12 @@ describe "DeletingTickets" do
   let(:project){Factory(:project)}
   let(:ticket){Factory(:ticket, :project => project, :user => user)}
   
-  
   before do
     @projects = Array.new()
     @projects.push(project)
     @tickets = Array.new()
     @tickets.push(ticket)
+    Factory(:permission, :thing => project, :user => user, :action => "view")
     login_as(user)
     visit('/')
     click_link(project.name)

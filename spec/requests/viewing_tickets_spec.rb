@@ -13,6 +13,9 @@ describe "ViewingTickets" do
     @tickets = Array.new()
     @tickets.push(text_mate_ticket)
     @tickets.push(ie_ticket)
+    Factory(:permission, :thing => text_mate_project, :user => user, :action => "view")
+    Factory(:permission, :thing => ie_project, :user => user, :action => "view")
+    login_as(user)
     visit('/')
   end
   

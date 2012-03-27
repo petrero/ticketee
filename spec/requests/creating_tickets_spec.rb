@@ -7,14 +7,11 @@ describe "CreatingTickets" do
   before do
     @projects = Array.new()
     @projects.push(ie_project)
+    Factory(:permission, :thing => ie_project, :user => user, :action => "view") 
+    login_as(user)
     visit('/')
-    click_link(ie_project.name)
+    click_link(ie_project.name)   
     click_link("New Ticket")
-    page.should have_content("You need to sign in or sign up before continuing.")
-    fill_in("Email", :with => user.email)
-    fill_in("Password", :with => user.password)
-    click_button("Sign in")
-    page.should have_content("New Ticket")
   end
   
   it "create a ticket with valid attributes" do
