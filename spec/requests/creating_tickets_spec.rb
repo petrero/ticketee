@@ -8,6 +8,7 @@ describe "CreatingTickets" do
     @projects = Array.new()
     @projects.push(ie_project)
     Factory(:permission, :thing => ie_project, :user => user, :action => "view") 
+    Factory(:permission, :thing => ie_project, :user => user, :action => "create tickets")
     login_as(user)
     visit('/')
     click_link(ie_project.name)   
