@@ -4,12 +4,9 @@ describe "ViewingTickets" do
   let(:user) {Factory(:confirmed_user)}
   let(:text_mate_project){Factory(:project, :name => "TextMate 2")}
   let(:ie_project){Factory(:project, :name => "Internet Explorer")}
-  let(:text_mate_ticket){Factory(:ticket, :project => text_mate_project, :title => "Make it shiny!", :description => "Gradients! Starbursts! Oh my!", :user => user)}
-  let(:ie_ticket){Factory(:ticket, :project => ie_project, :title => "Standards compliance!", :description => "Isn't a joke.", :user => user)}
+  let(:text_mate_ticket){Factory(:ticket, :project => text_mate_project, :title => "Text_Mate_Ticket_Title", :description => "Text_Mate_Ticket_description", :user => user)}
+  let(:ie_ticket){Factory(:ticket, :project => ie_project, :title => "Internet Explorer Ticket Title", :description => "Interner Exoplorer Ticket Description", :user => user)}
   before do
-    @projects = Array.new()
-    @projects.push(text_mate_project)
-    @projects.push(ie_project)
     @tickets = Array.new()
     @tickets.push(text_mate_ticket)
     @tickets.push(ie_ticket)
