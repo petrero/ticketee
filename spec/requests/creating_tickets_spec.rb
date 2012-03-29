@@ -32,10 +32,14 @@ describe "CreatingTickets" do
   
   it "creating a ticket with attachment" do
     fill_in("Title", :with => "Add documentation for blink tag")
-    fill_in("Description", :with => "The blink tag has a speed attribute")
-    page.attach_file("File", "spec/fixtures/speed.txt")
+    fill_in("Description", :with => "The blink tag has an undocumented speed attribute")
+    page.attach_file("File #1", "spec/fixtures/speed.txt")
+    page.attach_file("File #2", "spec/fixtures/spin.txt")
+    page.attach_file("File #3", "spec/fixtures/gradient.txt")
     click_button("Create Ticket")
     page.should have_content("Ticket has been created.")
-    find("#ticket .asset").should have_content("speed.txt")
+    find("#ticket .assets").should have_content("speed.txt")
+    find("#ticket .assets").should have_content("spin.txt")
+    find("#ticket .assets").should have_content("gradient.txt")
   end
 end
