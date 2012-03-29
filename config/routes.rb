@@ -10,7 +10,7 @@ Ticketee::Application.routes.draw do
       resources :permissions
     end
   end
-  
+  resources :files
   devise_for :users, :controllers => {:registrations => "registrations"}
    
   match "awaiting_confirmation" => "users#confirmation", :as => "confirm_user" 
