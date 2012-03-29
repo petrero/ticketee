@@ -29,4 +29,13 @@ describe "CreatingTickets" do
     page.should have_content("Title can't be blank")
     page.should have_content("Description can't be blank")
   end
+  
+  it "creating a ticket with attachment" do
+    fill_in("Title", :with => "Add documentation for blink tag")
+    fill_in("Description", :with => "The blink tag has a speed attribute")
+    page.attach_file("File", "spec/fixtures/speed.txt")
+    click_button("Create Ticket")
+    page.should have_content("Ticket has been created.")
+    find("#ticket .asset").should have_content("speed.txt")
+  end
 end

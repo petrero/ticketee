@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'devise'
 gem 'email_spec'
 gem 'cancan'
+gem 'paperclip'
 
 # Gems used only for assets and not required
 # in production environments by default.
