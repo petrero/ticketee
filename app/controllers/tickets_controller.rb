@@ -23,6 +23,7 @@ class TicketsController < ApplicationController
   
   def show
     @comment = @ticket.comments.build
+    @states = State.all
   end
   
   def edit

@@ -32,4 +32,14 @@ describe "CreatingComments" do
     page.should have_content("Comment has not been created.") 
     page.should have_content("Text can't be blank")
   end
+  
+  it "Changing a ticket's state" do
+    State.create(:name => "Open")
+    click_link(ticket.title)
+    fill_in("Text", :with => "This is a real issue")
+    select("Open", :from => "State")
+    click_button("Create Comment")
+    page.should have_content("Comment has been created.")
+    find("#ticket .state").should have_content("Open")  
+  end
 end
