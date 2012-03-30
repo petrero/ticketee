@@ -1,3 +1,3 @@
 Factory.define :project do |project|
-  project.sequence(:name) {|n| "aaaaaaa#{n}"}
+  project.sequence(:name) {|n| "project#{n}"}
 end
