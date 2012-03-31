@@ -6,7 +6,10 @@
 <% end %>
 <ul id='tickets'>
   <% @project.tickets.each do |ticket| %>
-    #<%= ticket.id %> - <%= link_to ticket.title, [@project, ticket] %> 
+    <li>
+      <%= render ticket.state if ticket.state %>
+      #<%= ticket.id %> - <%= link_to ticket.title, [@project, ticket] %>
+    </li> 
   <% end %>
 </ul>
 <% authorized?("create tickets".to_sym, @project) do %>
