@@ -1,4 +1,4 @@
-class Admin::StatesController < ApplicationController
+class Admin::StatesController < Admin::BaseController
   def index
     @states = State.all
   end
@@ -16,5 +16,13 @@ class Admin::StatesController < ApplicationController
       flash[:alert] = "State has been created."
       render :action => "new"
     end
+  end
+  
+  def make_default
+    @state = State.find(params[:id])
+    @state.default!
+    
+    flash[:notice] = "#{@state.name} is now the default state."
+    redirect_to admin_states_path
   end
 end
