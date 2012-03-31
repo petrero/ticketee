@@ -40,6 +40,7 @@ describe "CreatingComments" do
     select("Open", :from => "State")
     click_button("Create Comment")
     page.should have_content("Comment has been created.")
-    find("#ticket .state").should have_content("Open")  
+    find("#ticket .state").should have_content("Open") 
+    find("#comments").should have_content("Open")
   end
 end
