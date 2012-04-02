@@ -14,6 +14,7 @@ describe "AssigningPermissions" do
     @projects.push(project)
     @tickets = Array.new()
     @tickets.push(ticket)
+    State.create!(:name => "Open")
     login_as(admin)
     visit('/')
     click_link("Admin")
@@ -103,5 +104,22 @@ describe "AssigningPermissions" do
     click_link(project.name)
     click_link(ticket.title)
     page.should have_no_css('a', :text => "Delete Ticket")
+  end
+  
+  it "changing states for a feature" do
+    page.check("permissions_#{project.id}_view")
+    page.check("permissions_#{project.id}_change_states")
+    click_button("Update")
+    logout()
+    
+    login_as(user)
+    visit('/')
+    click_link(project.name)
+    click_link(ticket.title)
+    fill_in("Text", :with => "Opening this ticket.")
+    select("Open", :from => "State")
+    click_button("Create Comment")
+    page.should have_content("Comment has been created.")
+    find("#ticket .state").should have_content("Open")
   end
 end

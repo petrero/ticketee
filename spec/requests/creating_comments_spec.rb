@@ -34,6 +34,7 @@ describe "CreatingComments" do
   end
   
   it "Changing a ticket's state" do
+    Factory(:permission, :thing => project, :user => user,:action => "change states")
     State.create(:name => "Open")
     click_link(ticket.title)
     fill_in("Text", :with => "This is a real issue")
@@ -42,5 +43,10 @@ describe "CreatingComments" do
     page.should have_content("Comment has been created.")
     find("#ticket .state").should have_content("Open") 
     find("#comments").should have_content("Open")
+  end
+  
+  it "a user without permission cannor change the state" do
+    click_link(ticket.title) 
+    page.should have_no_css("#comment_state_id")
   end
 end
