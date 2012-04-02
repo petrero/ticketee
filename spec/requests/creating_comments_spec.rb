@@ -51,6 +51,7 @@ describe "CreatingComments" do
   end
   
   it "adding a tag to a ticket" do
+    Factory(:permission, :user => user, :action => "tag", :thing => project)
     click_link(ticket.title)
     fill_in("Text", :with => "Adding a bug tag")
     fill_in("Tags", :with => "bug")

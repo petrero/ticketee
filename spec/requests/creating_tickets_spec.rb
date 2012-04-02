@@ -45,6 +45,7 @@ describe "CreatingTickets" do
   end
   
   it "creating a ticket with tags" do
+    Factory(:permission, :action => "tag", :thing => ie_project, :user => user)
     fill_in("Title", :with => "Non-standards compliance")
     fill_in("Description", :with => "My pages are ugly!")
     fill_in("Tags", :with => "browser visual")
