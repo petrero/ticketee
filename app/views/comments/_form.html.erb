@@ -11,5 +11,9 @@
       <%= f.select :state_id, @states.map {|s| [s.name, s.id]}, :selected => @ticket.state_id %>
     </p>
   <% end %>
+  <p>
+    <%= label_tag :tags %>
+    <%= text_field_tag :tags, params[:tags] %>
+  </p>
   <%= f.submit %>
 <% end %>

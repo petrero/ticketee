@@ -49,4 +49,13 @@ describe "CreatingComments" do
     click_link(ticket.title) 
     page.should have_no_css("#comment_state_id")
   end
+  
+  it "adding a tag to a ticket" do
+    click_link(ticket.title)
+    fill_in("Text", :with => "Adding a bug tag")
+    fill_in("Tags", :with => "bug")
+    click_button("Create Comment")
+    page.should have_content("Comment has been created.")
+    find("#ticket #tags").should have_content("bug")  
+  end
 end
