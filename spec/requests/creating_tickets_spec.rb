@@ -43,4 +43,14 @@ describe "CreatingTickets" do
     find("#ticket .assets").should have_content("speed.txt")
     find("#ticket .assets").should have_content("spin.txt")
   end
+  
+  it "creating a ticket with tags" do
+    fill_in("Title", :with => "Non-standards compliance")
+    fill_in("Description", :with => "My pages are ugly!")
+    fill_in("Tags", :with => "browser visual")
+    click_button("Create Ticket")
+    page.should have_content("Ticket has been created.")
+    find("#ticket #tags").should have_content("browser")
+    find("#ticket #tags").should have_content("visual")
+  end
 end

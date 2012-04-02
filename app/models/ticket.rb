@@ -9,4 +9,13 @@ class Ticket < ActiveRecord::Base
   has_many :assets
   accepts_nested_attributes_for :assets
   has_many :comments
+  
+  has_and_belongs_to_many :tags
+  
+  def tag!(tags)
+    tags = tags.split(" ").map {|tag|
+      Tag.find_or_create_by_name(tag)
+    }
+    self.tags << tags
+  end
 end
