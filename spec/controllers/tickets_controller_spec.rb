@@ -40,7 +40,7 @@ describe TicketsController do
       cannot_create_tickets!
     end
     
-    it "cannot edit a ticket wqithout permission" do
+    it "cannot edit a ticket without permission" do
       get :edit, :id => ticket.id, :project_id => project.id
       cannot_update_tickets!
     end
@@ -63,5 +63,6 @@ describe TicketsController do
         :tags => "these are tags"
       Ticket.last.tags.should be_empty
     end
+    
   end
 end
