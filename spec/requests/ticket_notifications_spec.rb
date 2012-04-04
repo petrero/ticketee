@@ -27,8 +27,11 @@ describe "TicketNotifications" do
     
     open_email(alice.email)
     current_email.default_part_body.to_s.should include("updated the #{ticket.title} ticket")
+    current_email.should be_multipart
+    current_email.parts.size.should eql(2)
+    current_email.html_part.body.to_s.should include("updated the #{ticket.title} ticket")
     current_email.should have_subject("[ticketee] #{project.name} - #{ticket.title}")
-    click_first_link_in_email
+    visit_in_email("view this ticket online here")
     find("#ticket h2").should have_content(ticket.title)  
   end
 end
