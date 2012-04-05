@@ -21,6 +21,7 @@ RSpec.configure do |config|
   end
   config.after :each do
     DatabaseCleaner.clean
+    ActionMailer::Base.delivery_method = :test
   end
 
 end
