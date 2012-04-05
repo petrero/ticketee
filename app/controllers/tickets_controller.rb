@@ -53,6 +53,17 @@ class TicketsController < ApplicationController
     render 'projects/show'
   end
   
+  def watch
+    if @ticket.watchers.exists?(current_user)
+      @ticket.watchers -= [current_user]
+      flash[:notice] = "You are no longer watching this ticket"
+    else
+      @ticket.watchers << current_user
+      flash[:notice] = "You are now watching this ticket."
+    end
+    redirect_to project_ticket_path(@project, @ticket)
+  end
+  
   private
     def find_project
       @project = Project.for(current_user).find(params[:project_id])
