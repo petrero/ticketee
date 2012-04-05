@@ -34,4 +34,24 @@ describe "TicketNotifications" do
     visit_in_email("view this ticket online here")
     find("#ticket h2").should have_content(ticket.title)  
   end
+  
+  it "Comment authors are automatically subscribed to  a ticket" do
+    click_link(project.name)
+    click_link(ticket.title)
+    fill_in("Text", :with => "Is it out yet?")
+    click_button("Create Comment")
+    page.should have_content("Comment has been created.")
+    logout()
+    
+    reset_mailer
+    login_as(alice)
+    visit('/')
+    click_link(project.name)
+    click_link(ticket.title)
+    fill_in("Text", :with => "Not yet!")
+    click_button("Create Comment")
+    page.should have_content("Comment has been created.")
+    unread_emails_for(bob.email).size.should == parse_email_count(1)
+    unread_emails_for(alice.email).size.should == parse_email_count(0)
+  end
 end
