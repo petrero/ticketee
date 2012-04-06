@@ -37,6 +37,12 @@ Ticketee::Application.routes.draw do
   match "awaiting_confirmation" => "users#confirmation", :as => "confirm_user" 
   
   match 'admin/users/:user_id/permissions' => "admin/permissions#update", :as => :update_user_permissions, :method => :put
+  
+  namespace :api do
+    namespace :v1 do
+      resources :projects
+    end
+  end
   #get '/awaiting_confirmation', :to => "users#confirmation", :as => "confirm_user"
   # The priority is based upon order of creation:
   # first created -> highest priority.
