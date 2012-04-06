@@ -1,4 +1,5 @@
 class Api::V1::ProjectsController < Api::V1::BaseController
+  before_filter :authorize_admin!, :only => [:create, :update, :destroy]
   def index
     respond_with(Project.for(current_user))
   end
@@ -11,4 +12,5 @@ class Api::V1::ProjectsController < Api::V1::BaseController
       respond_with(project)
     end  
   end
+    
 end
