@@ -32,7 +32,10 @@ Ticketee::Application.routes.draw do
     end
   end
   resources :files
-  devise_for :users, :controllers => {:registrations => "registrations"}
+  devise_for :users, :controllers => {
+    :registrations => "registrations",
+    :omniauth_callbacks => "users/omniauth_callbacks"
+  }
    
   match "awaiting_confirmation" => "users#confirmation", :as => "confirm_user" 
   
