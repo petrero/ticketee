@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
   end
   
   before_save :ensure_authentication_token
+  
+  def self.reset_request_count!
+    update_all("request_count = 0", "request_count > 0")
+  end
 end
