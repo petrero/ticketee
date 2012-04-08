@@ -30,4 +30,5 @@ class Ticket < ActiveRecord::Base
     def creator_watches_me
       self.watchers << user
     end
+    
 end
