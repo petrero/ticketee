@@ -27,4 +27,26 @@ describe "/api/v1/tickets", :type => :api do
       last_response.body.should eql(project.tickets.to_json)
     end
   end
+  
+  context "pagination" do
+    before do
+      100.times do
+        Factory(:ticket, :project => project, :user => @user)
+      end
+    end
+    
+    it "gets the first page" do
+      get "/api/v1/projects/#{project.id}/tickets.json", 
+        :token => token, 
+        :page => 1
+      last_response.body.should eql(project.tickets.page(1).per(50).to_json)
+    end
+    
+    it "gets the second page" do
+       get "/api/v1/projects/#{project.id}/tickets.json", 
+        :token => token, 
+        :page => 2
+      last_response.body.should eql(project.tickets.page(2).per(50).to_json)
+    end
+  end
 end
