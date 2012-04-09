@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
   end
   
   def show
-    @tickets = @project.tickets  
+    @tickets = @project.tickets.page(params[:page]) 
   end
   
   def edit 
